@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Schedule Table</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Schedule Table</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Time</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+        </thead>
+        <tbody id="schedule-body">
+            <!-- Schedule data will be inserted here dynamically -->
+        </tbody>
+    </table>
+
+    <script>
+        // スケジュールデータの配列を作成します
+        const scheduleData = [
+            { time: "09:00", Monday: "Meeting", Tuesday: "Work", Wednesday: "Presentation", Thursday: "Work", Friday: "Training" },
+            { time: "10:00", Monday: "Work", Tuesday: "Work", Wednesday: "Work", Thursday: "Meeting", Friday: "Work" },
+            // 他のスケジュールデータを追加できます
+        ];
+
+        // テーブルのtbody要素を取得します
+        const tbody = document.getElementById('schedule-body');
+
+        // スケジュールデータをテーブルに挿入します
+        scheduleData.forEach(schedule => {
+            const row = document.createElement('tr');
+
+            // 時間を挿入します
+            const timeCell = document.createElement('td');
+            timeCell.textContent = schedule.time;
+            row.appendChild(timeCell);
+
+            // 曜日ごとのスケジュールを挿入します
+            ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].forEach(day => {
+                const cell = document.createElement('td');
+                cell.textContent = schedule[day];
+                row.appendChild(cell);
+            });
+
+            tbody.appendChild(row);
+        });
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Schedule Table</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        form {
+            margin-top: 20px;
+        }
+        label, input {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="submit"] {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Schedule Table</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Time</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+        </thead>
+        <tbody id="schedule-body">
+            <!-- Schedule data will be inserted here dynamically -->
+        </tbody>
+    </table>
+
+    <form id="schedule-form">
+        <label for="time">Time:</label>
+        <input type="text" id="time" required>
+
+        <label for="monday">Monday:</label>
+        <input type="text" id="monday" required>
+
+        <label for="tuesday">Tuesday:</label>
+        <input type="text" id="tuesday" required>
+
+        <label for="wednesday">Wednesday:</label>
+        <input type="text" id="wednesday" required>
+
+        <label for="thursday">Thursday:</label>
+        <input type="text" id="thursday" required>
+
+        <label for="friday">Friday:</label>
+        <input type="text" id="friday" required>
+
+        <input type="submit" value="Add Schedule">
+    </form>
+
+    <script>
+        // スケジュールデータの配列を作成します
+        let scheduleData = [
+            { time: "09:00", Monday: "Meeting", Tuesday: "Work", Wednesday: "Presentation", Thursday: "Work", Friday: "Training" },
+            { time: "10:00", Monday: "Work", Tuesday: "Work", Wednesday: "Work", Thursday: "Meeting", Friday: "Work" },
+            // 他のスケジュールデータを追加できます
+        ];
+
+        // テーブルのtbody要素を取得します
+        const tbody = document.getElementById('schedule-body');
+
+        // スケジュールデータをテーブルに挿入する関数
+        function renderScheduleTable() {
+            tbody.innerHTML = ""; // テーブルの内容をクリア
+
+            scheduleData.forEach(schedule => {
+                const row = document.createElement('tr');
+
+                // 時間を挿入します
+                const timeCell = document.createElement('td');
+                timeCell.textContent = schedule.time;
+                row.appendChild(timeCell);
+
+                // 曜日ごとのスケジュールを挿入します
+                ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].forEach(day => {
+                    const cell = document.createElement('td');
+                    cell.textContent = schedule[day];
+                    row.appendChild(cell);
+                });
+
+                tbody.appendChild(row);
+            });
+        }
+
+        // フォームを送信したときに新しいスケジュールを追加するイベントリスナー
+        const form = document.getElementById('schedule-form');
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            // フォームの入力値を取得
+            const time = document.getElementById('time').value;
+            const monday = document.getElementById('monday').value;
+            const tuesday = document.getElementById('tuesday').value;
+            const wednesday = document.getElementById('wednesday').value;
+            const thursday = document.getElementById('thursday').value;
+            const friday = document.getElementById('friday').value;
+
+            // 新しいスケジュールを追加
+            scheduleData.push({
+                time,
+                Monday: monday,
+                Tuesday: tuesday,
+                Wednesday: wednesday,
+                Thursday: thursday,
+                Friday: friday,
+            });
+
+            // テーブルを更新して新しいスケジュールを表示
+            renderScheduleTable();
+
+            // フォームの入力をクリア
+            form.reset();
+        });
+
+        // 初期スケジュール表を表示
+        renderScheduleTable();
+    </script>
+</body>
+</html>
