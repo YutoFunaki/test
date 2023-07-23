@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Schedule Table</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Schedule Table</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Time</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+        </thead>
+        <tbody id="schedule-body">
+            <!-- Schedule data will be inserted here dynamically -->
+        </tbody>
+    </table>
+
+    <script>
+        // スケジュールデータの配列を作成します
+        const scheduleData = [
+            { time: "09:00", Monday: "Meeting", Tuesday: "Work", Wednesday: "Presentation", Thursday: "Work", Friday: "Training" },
+            { time: "10:00", Monday: "Work", Tuesday: "Work", Wednesday: "Work", Thursday: "Meeting", Friday: "Work" },
+            // 他のスケジュールデータを追加できます
+        ];
+
+        // テーブルのtbody要素を取得します
+        const tbody = document.getElementById('schedule-body');
+
+        // スケジュールデータをテーブルに挿入します
+        scheduleData.forEach(schedule => {
+            const row = document.createElement('tr');
+
+            // 時間を挿入します
+            const timeCell = document.createElement('td');
+            timeCell.textContent = schedule.time;
+            row.appendChild(timeCell);
+
+            // 曜日ごとのスケジュールを挿入します
+            ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].forEach(day => {
+                const cell = document.createElement('td');
+                cell.textContent = schedule[day];
+                row.appendChild(cell);
+            });
+
+            tbody.appendChild(row);
+        });
+    </script>
+</body>
+</html>
